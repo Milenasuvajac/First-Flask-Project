@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Add a task{% endblock %}
+{% block content %}
+<h1 align="center"></h1>
+
+
+
+<form method="POST">
+    <textarea name="note" id="note" class="form-control"> </textarea>
+    <div align="center">
+    <div align="center">
+    <label>Who should do this Task?</label><br>
+ 
+    {% for user in usernames %}
+    <input type="radio" name="foruser" value="{{ user.name }}">
+    <label for="username" > {{ user }} </label>
+    {% endfor %}
+    <input type="radio" name="foruser" value="both">
+    <label for="both"> Both </label>
+    </div>    
+    <div align="center"> Is this a daily task? <br>
+        <input type="radio" id="yes" name="dailytask" value="yes">
+        <label for="yes"> Yes </label> 
+        <input type="radio" id="no" name="dailytask" value="no">
+        <label for="no"> No </label> <br>
+    </div>
+    <div>
+        <label for="duration">How long will this task take approximately? </label>
+        <select name="duration" id="duration">
+              <option value="5">5 minutes or less</option>
+              <option value="10">10 minutes</option>
+              <option value="15">15 minutes</option>
+              <option value="20">20 minutes</option>
+              <option value="25">25 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="40">40 minutes</option>
+              <option value="50">50 minutes</option>
+              <option value="60">1 hour</option>
+              <option value="75">1 hour 15 minutes</option>
+              <option value="90">1 hour 30 minutes</option>
+              <option value="180">2 hours</option>
+          </select>     
+         </div>
+    <button type="submit" class="btn btn-primary">Add Note</button> </div>
+ </form>
+
+
+<br>
+
+<ul class="list-group list-group-flush" id="notes">
+    {% for note in user.notes %}
+    {% if note not in list_dailytasks %}
+    <li class="list-group-item">{{ note.data }}
+        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+            <span aria-hidden="true">&times;</span>
+    </li>
+    {% else %}
+    <li class="list-group-item">{{ note.data }}
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}

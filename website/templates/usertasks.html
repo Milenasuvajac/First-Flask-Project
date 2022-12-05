@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<h1 align="center">Hello {{ user }} ! Here are your tasks! </h1>
+
+
+<main role="main" class="container extra-bottom">
+    <h1 class="mt-5">TODO List Demo App</h1>
+    <p><mark>Do it now.</mark></p>
+  </main>
+
+
+
+  <div class="container table-responsive">          
+  <table class="table">
+      <thead>
+      <tr>
+          <th id="task-id">Note ID</th>
+          <th id="task">Task</th>
+          <th id="status">Status</th>
+          <th id="update">Remove</th>
+          <th id="duration">Duration</th>
+          <th id="user">User</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for note in user.notes %}
+      {% if note.dailytask==False %}
+          <tr>
+              <td>{{note.id}}</td>
+              <td>{{note.data}}</td>
+
+              {% if note.finish==True %}
+              <td><a href="{{ url_for('views.updateStatus', id=note.id) }}"  data-source="{{note.id}}">Completed</a></td>
+              {% else %}
+              <td><a href="{{ url_for('views.updateStatus', id=note.id) }}" data-source="{{note.id}}">Not completed</a></td>
+              {% endif %}
+              <td><button type="button" onClick="deleteNote({{ note.id }})">Remove</button></td>
+              <td>{{note.duration}}</td>
+              <td data-source="{{ note.note_id }}" >{% for user in note.user_id %}{{ user }} {% endfor %}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}     
+      </tbody>
+  </table>
+  </div>
+<br><hr><br>
+  <div class="container table-responsive">          
+    <table class="table">
+        <thead>
+        <tr>
+            <th id="task-id">Note ID</th>
+            <th id="task">Task</th>
+            <th id="status">Status</th>
+            <th id="duration">Duration</th>
+            <th id="user">User</th>
+        </tr>
+        </thead>
+  
+        <tbody>
+        {% for note in notes %}
+        {% if note.dailytask==True %}
+            <tr>
+                <td>{{note.id}}</td>
+                <td>{{note.data}}</td>
+  
+                {% if note.finish==True %}
+                <td><a href="{{ url_for('views.updateStatus', id=note.id) }}"  data-source="{{note.id}}">Completed</a></td>
+                {% else %}
+                <td><a href="{{ url_for('views.updateStatus', id=note.id) }}" data-source="{{note.id}}">Not completed</a></td>
+                {% endif %}
+                <td>{{note.duration}}</td>
+                <td data-source="{{ note.note_id }}" >{% for user in note.user_id %}{{ user }} {% endfor %}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}    
+    </tbody>
+    </table>
+ </div>
+
+
+ <form method="POST">
+    <textarea name="note" id="note" class="form-control"> </textarea>
+    <div align="center">
+    <div align="center"> Is this a daily task? <br>
+        <input type="radio" id="yes" name="dailytask" value="yes">
+        <label for="yes"> Yes </label> 
+        <input type="radio" id="no" name="dailytask" value="no">
+        <label for="no">No</label> <br>
+    </div>
+    <div>
+      <label for="duration">How long will this task take approximately? </label>
+      <select name="duration" id="duration">
+            <option value="5">5 minutes or less</option>
+            <option value="10">10 minutes</option>
+            <option value="15">15 minutes</option>
+            <option value="20">20 minutes</option>
+            <option value="25">25 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="40">40 minutes</option>
+            <option value="50">50 minutes</option>
+            <option value="60">1 hour</option>
+            <option value="75">1 hour 15 minutes</option>
+            <option value="90">1 hour 30 minutes</option>
+            <option value="180">2 hours</option>
+        </select>     
+       </div>
+    <button type="submit" class="btn btn-primary">Add Note</button> </div>
+ </form>
+
+
+  <footer class="footer">
+    <div class="container">
+          <p class="text-muted">Milena's first app</p>
+    </div>
+  </footer>
+    {% endblock %}
