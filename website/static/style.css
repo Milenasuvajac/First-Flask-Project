@@ -1,0 +1,79 @@
+html {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(45deg, rgba(226, 226, 226, 0.485), rgba(212, 216, 217, 0.458)) ;
+}
+
+body {
+    background: linear-gradient(45deg, rgba(220, 241, 242, 0.479), rgba(244, 249, 248, 0.479));
+    font-family: "Quicksand", sans-serif;
+    color:rgb(38, 54, 55);
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    margin-top:0;
+    margin-bottom: 2px;
+    padding: 0;
+
+}
+
+nav {
+    height: 5rem;
+    background-color: rgba(173, 226, 230, 0.577);
+    padding: 1.3rem;
+}
+
+nav a {
+    padding: 2rem;
+    color:rgb(12, 102, 109);
+    font-size: 1.5rem;
+    text-shadow: 0 1px 0.5px rgb(38, 54, 55);
+}
+
+#logout {
+    position: relative;
+    left: 200px;
+}
+
+nav a:hover {
+    text-decoration: none;
+    color:rgb(93, 95, 95);
+}
+
+h1 {
+    color: rgb(51, 58, 73);
+    padding: 3rem;
+    font-size: 5rem;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgb(7, 10, 26);
+    text-align: center;
+}
+
+h2 {
+    color: rgb(65, 75, 87);
+    font-size: 3rem;
+    font-weight: lighter;
+    padding: 0.7rem;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgb(0,0,0);
+}
+
+form {
+    margin: auto;
+    width: 40rem;
+}
+
+.label {
+    font-size: 1.3rem;
+    display: block;
+    margin-top: 1rem;
+}
+
+
+footer { 
+    margin: 5rem 0 0 0;
+    padding: 1rem;
+    text-align: right;
+}
+

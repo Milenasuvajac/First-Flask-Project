@@ -2,91 +2,79 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-<h1 align="center">Hello {{ user }} ! Nice to see you! </h1>
+<h1>Hello {{ user }} ! Nice to see you! </h1>
 
+<main>
 
-<main role="main" class="container extra-bottom">
-    <h1 class="mt-5">TODO List Demo App</h1>
-    <p><mark>Do it now.</mark></p>
-  </main>
-
-
-
+  <h2>To-Do List</h2>
   <div class="container table-responsive">          
   <table class="table">
-      <thead>
-      <tr>
-          <th id="task-id">Note ID</th>
-          <th id="task">Task</th>
-          <th id="status">Status</th>
-          <th id="update">Remove</th>
-          <th id="duration">Duration</th>
-          <th id="user">User</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      {% for note in notes %}
-      {% if note.dailytask==False %}
-          <tr>
-              <td>{{note.id}}</td>
-              <td>{{note.data}}</td>
-
-              {% if note.finish==True %}
-              <td><a href="{{ url_for('views.updateStatus', id=note.id) }}"  data-source="{{note.id}}">Completed</a></td>
-              {% else %}
-              <td><a href="{{ url_for('views.updateStatus', id=note.id) }}" data-source="{{note.id}}">Not completed</a></td>
-              {% endif %}
-              <td><button type="button" onClick="deleteNote({{ note.id }})">Remove</button></td>
-              <td> {{note.duration}} </td>
-              <td data-source="{{ note.note_id }}" >{% for user in note.user_id %}{{ user }} {% endfor %}</td>
-          </tr>
-        {% endif %}
-      {% endfor %}     
-      </tbody>
+    <thead>
+    <tr>
+      <th id="task">Task</th>
+      <th id="status">Status</th>
+      <th id="update">Remove</th>
+      <th id="duration">Duration</th>
+      <th id="user">For</th>
+    </tr>
+    </thead>
+    <tbody>
+  {% for note in notes %}
+  {% if note.dailytask==False %}
+    <tr>
+      <td>{{note.data}}</td>
+  {% if note.finish==True %}
+      <td><a href="{{ url_for('views.updateStatus', id=note.id) }}"  data-source="{{note.id}}"> Completed </a></td>
+  {% else %}
+      <td><a href="{{ url_for('views.updateStatus', id=note.id) }}" data-source="{{note.id}}">Not completed</a></td>
+  {% endif %}
+      <td><button type="button" onClick="deleteNote({{ note.id }})">Remove</button></td>
+      <td> {{note.duration}} min </td>
+      <td data-source="{{ note.note_id }}" >{% for user in note.user_id %}{{ user }} {% endfor %}</td>
+    </tr>
+  {% endif %}
+  {% endfor %}     
+    </tbody>
   </table>
-  </div>
+  </div><br><hr><br>
 
-  <br><hr><br>
+  <h2>Daily chores</h2><br>
+
   <div class="container table-responsive">          
     <table class="table">
-        <thead>
-        <tr>
-            <th id="task-id">Note ID</th>
-            <th id="task">Task</th>
-            <th id="status">Status</th>
-            <th id="duration">Duration</th>
-            <th id="user">User</th>
-        </tr>
-        </thead>
-  
-        <tbody>
-        {% for note in notes %}
-        {% if note.dailytask==True %}
-            <tr>
-                <td>{{note.id}}</td>
-                <td>{{note.data}}</td>
-  
-                {% if note.finish==True %}
-                <td><a href="{{ url_for('views.updateStatus', id=note.id) }}"  data-source="{{note.id}}">Completed</a></td>
-                {% else %}
-                <td><a href="{{ url_for('views.updateStatus', id=note.id) }}" data-source="{{note.id}}">Not completed</a></td>
-                {% endif %}
-                <td> {{note.duration}} </td>
-                <td data-source="{{ note.note_id }}" >{% for user in note.user_id %}{{ user }} {% endfor %}</td>
-
-            </tr>
-          {% endif %}
-        {% endfor %}    
+      <thead>
+      <tr>
+        <th id="task">Task</th>
+        <th id="status">Status</th>
+        <th id="duration">Duration</th>
+        <th id="user">For</th>
+      </tr>
+      </thead>
+      <tbody>
+  {% for note in notes %}
+  {% if note.dailytask==True %}
+      <tr>
+        <td>{{note.data}}</td>
+  {% if note.finish==True %}
+        <td><a href="{{ url_for('views.updateStatus', id=note.id) }}"  data-source="{{note.id}}">Completed</a></td>
+  {% else %}
+        <td><a href="{{ url_for('views.updateStatus', id=note.id) }}" data-source="{{note.id}}">Not completed</a></td>
+  {% endif %}
+        <td> {{note.duration}} min </td>
+        <td data-source="{{ note.note_id }}" >{% for user in note.user_id %}{{ user }} {% endfor %}</td>
+      </tr>
+  {% endif %}
+  {% endfor %}    
     </tbody>
-    </table>
+  </table>
  </div>
+</main>
 
+<footer class="footer">
+  <hr>
+  <div class="container">
+    <p class="text-muted">Milena's first app</p>
+  </div>
+</footer>
 
-
-  <footer class="footer">
-    <div class="container">
-          <p class="text-muted">Milena's first app</p>
-    </div>
-  </footer>
-    {% endblock %}
+{% endblock %}
